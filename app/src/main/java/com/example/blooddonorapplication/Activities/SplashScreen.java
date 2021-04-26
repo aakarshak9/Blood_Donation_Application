@@ -6,6 +6,7 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.blooddonorapplication.Activities.onBoardScreen.OnBoardingScreen;
 import com.example.blooddonorapplication.R;
 
 public class SplashScreen extends AppCompatActivity {

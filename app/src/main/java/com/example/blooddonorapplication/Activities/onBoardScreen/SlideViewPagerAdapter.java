@@ -1,4 +1,4 @@
-package com.example.blooddonorapplication.Activities;
+package com.example.blooddonorapplication.Activities.onBoardScreen;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.example.blooddonorapplication.Activities.MainActivity;
 import com.example.blooddonorapplication.R;
 
 public class SlideViewPagerAdapter extends PagerAdapter {
@@ -35,7 +36,7 @@ public class SlideViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_screen, container, false);
 
         ImageView logo = view.findViewById(R.id.logo);

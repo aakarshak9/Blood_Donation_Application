@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodDonorApplication">
-        <activity android:name=".Activities.OnBoardingScreen">
+        <activity android:name=".Activities.onBoardScreen.OnBoardingScreen">
 
         </activity>
         <activity android:name=".Activities.SplashScreen">

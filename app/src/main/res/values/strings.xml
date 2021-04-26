@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Blood Bucket</string>
-    <string name="start">Start</string>
     <string name="donor">Donate Blood</string>
     <string name="blood_description">Blood Donation Is A Small Act Of Kindness That Does Great And Big Wonders</string>
     <string name="blood_donator">BLOOD BUCKET</string>
@@ -8,4 +7,5 @@
     <string name="search_description">A single pint can save three lives, a single gesture can create a million smiles </string>
     <string name="save_life">Save Life</string>
     <string name="inspiration_description">The blood is red gold in the time of saving a life</string>
+    <string name="start">GO</string>
 </resources>

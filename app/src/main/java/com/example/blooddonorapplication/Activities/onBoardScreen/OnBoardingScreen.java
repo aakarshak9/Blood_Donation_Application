@@ -1,4 +1,4 @@
-package com.example.blooddonorapplication.Activities;
+package com.example.blooddonorapplication.Activities.onBoardScreen;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.blooddonorapplication.Activities.MainActivity;
 import com.example.blooddonorapplication.R;
 
 public class OnBoardingScreen extends AppCompatActivity {
