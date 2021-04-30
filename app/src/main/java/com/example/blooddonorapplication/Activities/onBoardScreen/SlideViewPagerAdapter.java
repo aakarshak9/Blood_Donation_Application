@@ -45,13 +45,13 @@ public class SlideViewPagerAdapter extends PagerAdapter {
         ImageView ind2 = view.findViewById(R.id.indi2);
         ImageView ind3 = view.findViewById(R.id.indi3);
 
-        TextView title=view.findViewById(R.id.boarding_title);
-        TextView description=view.findViewById(R.id.boarding_des_one);
+        TextView title = view.findViewById(R.id.boarding_title);
+        TextView description = view.findViewById(R.id.boarding_des_one);
 
-        ImageView next=view.findViewById(R.id.onboard_next);
-        ImageView back=view.findViewById(R.id.onboard_back);
+        ImageView next = view.findViewById(R.id.onboard_next);
+        ImageView back = view.findViewById(R.id.onboard_back);
 
-        Button getstarted=view.findViewById(R.id.getstartedbtn);
+        Button getstarted = view.findViewById(R.id.getstartedbtn);
 
         getstarted.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class SlideViewPagerAdapter extends PagerAdapter {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OnBoardingScreen.viewPager.setCurrentItem(position+1);
+                OnBoardingScreen.viewPager.setCurrentItem(position + 1);
 
             }
         });
@@ -73,11 +73,11 @@ public class SlideViewPagerAdapter extends PagerAdapter {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OnBoardingScreen.viewPager.setCurrentItem(position-1);
+                OnBoardingScreen.viewPager.setCurrentItem(position - 1);
             }
         });
 
-        switch (position){
+        switch (position) {
             case 0:
                 logo.setImageResource(R.drawable.on_board_one_image);
                 ind1.setImageResource(R.drawable.selected);
