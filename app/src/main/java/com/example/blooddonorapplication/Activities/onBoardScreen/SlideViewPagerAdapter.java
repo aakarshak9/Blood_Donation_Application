@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.blooddonorapplication.Activities.MainActivity;
+import com.example.blooddonorapplication.Activities.RegisterActivity;
 import com.example.blooddonorapplication.R;
 
 public class SlideViewPagerAdapter extends PagerAdapter {
@@ -56,7 +57,7 @@ public class SlideViewPagerAdapter extends PagerAdapter {
         getstarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, RegisterActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
