@@ -9,4 +9,7 @@
     <string name="inspiration_description">The blood is red gold in the time of saving a life</string>
     <string name="start">GO</string>
     <string name="registration_page">Registration Page</string>
+
+    <string name="hello_worldRed"><![CDATA[<b><font color=#FF0000>Hello world!</font></b>]]></string>
+
 </resources>

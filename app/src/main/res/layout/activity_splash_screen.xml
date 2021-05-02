@@ -9,6 +9,7 @@
     tools:context=".Activities.SplashScreen">
 
     <TextView
+        android:id="@+id/text_splash_logo"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
         android:text="@string/blood_donator"

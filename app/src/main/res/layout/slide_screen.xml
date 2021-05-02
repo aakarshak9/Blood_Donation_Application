@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.496"
-        tools:srcCompat="@drawable/on_board_one_image" />
+        tools:src="@drawable/on_board_one_image" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -67,8 +67,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_bg"
-        android:textColor="@color/white"
+        app:backgroundTint="@color/magenta"
         android:text="@string/start"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.956"
@@ -86,7 +87,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boarding_des_one"
-        app:srcCompat="@drawable/selected" />
+        tools:src="@drawable/selected" />
 
     <ImageView
         android:id="@+id/indi2"
@@ -99,7 +100,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/indi1"
         app:layout_constraintTop_toTopOf="@+id/indi1"
-        app:srcCompat="@drawable/selected" />
+        tools:src="@drawable/selected" />
 
     <ImageView
         android:id="@+id/indi3"
@@ -110,7 +111,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/indi2"
         app:layout_constraintTop_toTopOf="@+id/indi2"
-        app:srcCompat="@drawable/selected" />
+        tools:src="@drawable/selected" />
 
     <ImageView
         android:id="@+id/onboard_back"
@@ -135,5 +136,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
-        tools:srcCompat="@drawable/ic_next" />
+        tools:src="@drawable/ic_next" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
