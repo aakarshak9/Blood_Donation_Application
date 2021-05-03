@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/wave">
@@ -74,6 +74,8 @@
                 android:layout_height="match_parent"
                 android:hint="Name"
                 app:boxStrokeColor="@color/magenta"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/magenta">
 
@@ -94,6 +96,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="City"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
                 app:boxStrokeColor="@color/magenta"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/magenta">
@@ -114,6 +118,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Phone No."
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
                 app:boxStrokeColor="@color/magenta"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/magenta">
@@ -135,6 +141,12 @@
                 android:layout_height="match_parent"
                 android:hint="Blood Group"
                 app:boxStrokeColor="@color/magenta"
+                app:counterEnabled="true"
+                android:layout_marginBottom="15dp"
+                app:helperText="Blood Group and +/- Allowed"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/magenta"
+                app:counterMaxLength="3"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/magenta">
 
@@ -150,14 +162,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Password"
                 app:boxStrokeColor="@color/magenta"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true"
+                app:helperText="Minimum 8 Characters 0-9, a-z, A-Z, Special Character"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/magenta"
                 app:hintTextColor="@color/magenta"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/magenta">
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
@@ -165,7 +182,9 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_password"
                     android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins_light" />
+                    android:fontFamily="@font/poppins_light"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -180,6 +199,8 @@
             android:fontFamily="@font/poppins_light"
             android:text="SUBMIT"
             android:textColor="@color/white"
+            android:gravity="center"
+            android:onClick="submit"
             android:textSize="18sp"
             app:backgroundTint="@color/magenta"
             app:layout_constraintEnd_toEndOf="@id/linearLayout"
