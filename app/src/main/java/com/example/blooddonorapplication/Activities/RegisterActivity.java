@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.textclassifier.TextLinks;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -22,7 +20,6 @@ import com.example.blooddonorapplication.Utils.Endpoints;
 import com.example.blooddonorapplication.Utils.VolleySingleton;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,17 +28,8 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextInputEditText name, city, phone, blood_group, password;
+    private TextInputEditText nameEt, cityEt, phoneEt, blood_groupEt, passwordEt;
     private Button submit;
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
-            //"(?=.*[0-9])" +         //at least 1 digit
-            //"(?=.*[a-z])" +         //at least 1 lower case letter
-            //"(?=.*[A-Z])" +         //at least 1 upper case letter
-            "(?=.*[a-zA-Z])" +      //any letter
-            "(?=.*[@#$%^&+=])" +    //at least 1 special character
-            "(?=\\S+$)" +           //no white spaces
-            ".{8,}" +               //at least 8 characters
-            "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +37,29 @@ public class RegisterActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_register);
 
-        name = findViewById(R.id.name);
-        city = findViewById(R.id.city);
-        phone = findViewById(R.id.phone_no);
-        blood_group = findViewById(R.id.blood_group);
-        password = findViewById(R.id.password);
-        submit= findViewById(R.id.submit);
+        nameEt = findViewById(R.id.name);
+        cityEt = findViewById(R.id.city);
+        phoneEt = findViewById(R.id.phone_no);
+        blood_groupEt = findViewById(R.id.blood_group);
+        passwordEt = findViewById(R.id.password);
+        submit = findViewById(R.id.submit);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name, city, phone, blood_group, password;
+                name = nameEt.getText().toString();
+                city = cityEt.getText().toString();
+                phone = phoneEt.getText().toString();
+                blood_group = blood_groupEt.getText().toString();
+                password = passwordEt.getText().toString();
+                if (isValid(name, city, phone, blood_group, password)) {
+                    register(name, city, phone, blood_group, password);
+                }
+            }
+        });
 
     }
-
-
 
     private void register(final String name, String city, String phone, String blood_group, String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.REGISTER_URL, new Response.Listener<String>() {
@@ -67,9 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (response.equals("Success")) {
                     Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(RegisterActivity.this,MainActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     RegisterActivity.this.finish();
-                }else {
+                } else {
                     Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -92,6 +92,80 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+
+    private boolean isValid(String name, String city, String phone, String blood_group, String password) {
+        List<String> valid_blood_group = new ArrayList<>();
+        valid_blood_group.add("A+");
+        valid_blood_group.add("A-");
+        valid_blood_group.add("B+");
+        valid_blood_group.add("B+-");
+        valid_blood_group.add("AB+");
+        valid_blood_group.add("AB-");
+        valid_blood_group.add("O+");
+        valid_blood_group.add("O-");
+
+        final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
+                //"(?=.*[0-9])" +         //at least 1 digit
+                //"(?=.*[a-z])" +         //at least 1 lower case letter
+                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{8,}" +               //at least 8 characters
+                "$");
+
+        //Validation for Name
+        if (name.isEmpty()) {
+            nameEt.setError("Field Can't Be Empty");
+            return false;
+        } else if (name.length() > 20) {
+            nameEt.setError("Username Is Too Long");
+            return false;
+        }
+
+        //Validation for City
+        else if (city.isEmpty()) {
+            cityEt.setError("Field Can't Be Empty");
+            return false;
+        } else if (city.length() > 20) {
+            cityEt.setError("City Name Is Too Long");
+            return false;
+        }
+
+        //Validation for Phone Number
+        else if (phone.isEmpty()) {
+            phoneEt.setError("Field Can't Be Empty");
+            return false;
+        } else if (phone.length() != 10) {
+            phoneEt.setError("Invalid Number");
+            return false;
+        }
+
+        //Validation for Blood Group
+        else if (blood_group.isEmpty()) {
+            blood_groupEt.setError("Field Cannot Be Empty");
+            return false;
+        } else if (blood_group.length() > 3) {
+            blood_groupEt.setError("Only 3 Character Allowed");
+            return false;
+        } else if (!valid_blood_group.contains(blood_group)) {
+            blood_groupEt.setError("Blood Group is Invalid Choose From" + valid_blood_group);
+            return false;
+        }
+
+        //Validation for Password
+        else if (password.isEmpty()) {
+            passwordEt.setError("Field Cannot be Empty");
+            return false;
+        } else if (password.length() < 8) {
+            passwordEt.setError("Minimum 8 Character Long");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+            passwordEt.setError("Must include 0-9, a-z, A-Z, 1 Special Character ");
+            return false;
+        }
+        return true;
     }
 
 }
