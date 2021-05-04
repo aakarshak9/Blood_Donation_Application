@@ -8,6 +8,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.blooddonorapplication.Activities.LoginActivity;
 import com.example.blooddonorapplication.Activities.MainActivity;
 import com.example.blooddonorapplication.Activities.RegisterActivity;
 import com.example.blooddonorapplication.R;
@@ -27,7 +28,7 @@ public class OnBoardingScreen extends AppCompatActivity {
         adapter = new SlideViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
         if (isOpenAlready()) {
-            Intent intent = new Intent(OnBoardingScreen.this, RegisterActivity.class);
+            Intent intent = new Intent(OnBoardingScreen.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } else {
