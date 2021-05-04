@@ -200,7 +200,6 @@
             android:text="SUBMIT"
             android:textColor="@color/white"
             android:gravity="center"
-            android:onClick="submit"
             android:textSize="18sp"
             app:backgroundTint="@color/magenta"
             app:layout_constraintEnd_toEndOf="@id/linearLayout"
