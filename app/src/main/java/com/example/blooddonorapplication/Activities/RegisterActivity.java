@@ -91,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         String blood_groupM = blood_group.getText().toString().trim();
 
         if (blood_groupM.isEmpty()) {
-            blood_group.setError("Field Can't Be Empty");
+            blood_group.setError("Field Cannot Be Empty");
             return false;
         } else if (blood_groupM.length() > 3) {
             blood_group.setError("Only 3 Character Allowed, +/- must Include");
