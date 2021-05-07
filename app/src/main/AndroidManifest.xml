@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BloodDonorApplication">
-        <activity android:name=".Activities.SearchActivity"></activity>
+        <activity android:name=".Activities.MakeRequestActivity"/>
+        <activity android:name=".Activities.SearchActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.RegisterActivity" />
         <activity android:name=".Activities.onBoardScreen.OnBoardingScreen" />
