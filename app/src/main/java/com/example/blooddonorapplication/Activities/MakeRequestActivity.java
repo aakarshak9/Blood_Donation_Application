@@ -26,6 +26,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.androidnetworking.interfaces.UploadProgressListener;
 import com.bumptech.glide.Glide;
 import com.example.blooddonorapplication.R;
@@ -117,7 +118,7 @@ public class MakeRequestActivity extends AppCompatActivity {
         try {
             path = getPath(imageUri);
         } catch (URISyntaxException e) {
-            Toast.makeText(this, "Wrong URI", Toast.LENGTH_SHORT).show();
+            showMessage("wrong uri");
         }
         String number = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                 .getString("number", "12345");
@@ -140,10 +141,10 @@ public class MakeRequestActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if (response.getBoolean("success")) {
-                                showMessage("Succesfull");
+                            if(response.getBoolean("success")){
+                                showMessage("Successful");
                                 MakeRequestActivity.this.finish();
-                            } else {
+                            }else {
                                 showMessage(response.getString("message"));
                             }
                         } catch (JSONException e) {
@@ -179,6 +180,9 @@ public class MakeRequestActivity extends AppCompatActivity {
     private boolean isValid() {
         if (messagetext.getText().toString().isEmpty()) {
             messagetext.setError("Field's can't be Empty");
+            return false;
+        }else if (imageUri==null){
+            showMessage("Pick Image");
             return false;
         }
         return true;
