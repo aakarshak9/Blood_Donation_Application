@@ -40,7 +40,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder holder,
                                  final int position) {
         holder.message.setText(dataSet.get(position).getMessage());
-        Glide.with(context).load(dataSet.get(position).getImageUrl()).into(holder.imageView);
+        Glide.with(context).load(dataSet.get(position).getUrl()).into(holder.imageView);
         holder.callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

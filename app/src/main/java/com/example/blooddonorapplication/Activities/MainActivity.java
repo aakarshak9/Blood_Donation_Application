@@ -2,22 +2,37 @@ package com.example.blooddonorapplication.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.blooddonorapplication.Adapters.RequestAdapter;
 import com.example.blooddonorapplication.DataModel.RequestDataModel;
 import com.example.blooddonorapplication.R;
+import com.example.blooddonorapplication.Utils.Endpoints;
+import com.example.blooddonorapplication.Utils.VolleySingleton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,15 +77,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateHomepage() {
-        RequestDataModel requestDataModel = new RequestDataModel("There is a hope of life to someone in your blood donation", "https://images.unsplash.com/photo-1569407616525-3df696e2cfde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestDataModels.add(requestDataModel);
-        requestAdapter.notifyDataSetChanged();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.GET_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Gson gson=new Gson();
+                Type type= new TypeToken<List<RequestDataModel>>(){}.getType();
+                List<RequestDataModel> dataModels=gson.fromJson(response,type);
+                requestDataModels.addAll(dataModels);
+                requestAdapter.notifyDataSetChanged();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                Log.d("VOLLEY", error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 
