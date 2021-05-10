@@ -63,14 +63,15 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void login(String number, String password) {
+    private void login(final String number,final String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.LOGIN_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equals("Success")) {
+                if (!response.equals("Invalid Credentials")) {
                     Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("number",number).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("city",response).apply();
                     LoginActivity.this.finish();
                 } else {
                     Toast.makeText(LoginActivity.this, response, Toast.LENGTH_SHORT).show();
@@ -86,8 +87,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("number", number);
                 params.put("password", password);
+                params.put("number", number);
                 return params;
             }
         };

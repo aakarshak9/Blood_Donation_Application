@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -65,7 +66,8 @@ public class RegisterActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.REGISTER_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.equals("Success")) {
+                if (!response.equals("Invalid Credentials")) {
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putString("city",city).apply();
                     Toast.makeText(RegisterActivity.this, response, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                     RegisterActivity.this.finish();

@@ -74,15 +74,26 @@ public class MainActivity extends AppCompatActivity {
         requestAdapter = new RequestAdapter(requestDataModels, this);
         recyclerView.setAdapter(requestAdapter);
         populateHomepage();
+        TextView pick_location = findViewById(R.id.location);
+        String location = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("city", "no_city_found");
+        if (!location.equals("no_city_found")) {
+            pick_location.setText(location);
+        }
+
+
+
     }
 
     private void populateHomepage() {
+        String city = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("city", "no_city");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.GET_REQUEST, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Gson gson=new Gson();
-                Type type= new TypeToken<List<RequestDataModel>>(){}.getType();
-                List<RequestDataModel> dataModels=gson.fromJson(response,type);
+                Gson gson = new Gson();
+                Type type = new TypeToken<List<RequestDataModel>>() {
+                }.getType();
+                List<RequestDataModel> dataModels = gson.fromJson(response, type);
                 requestDataModels.addAll(dataModels);
                 requestAdapter.notifyDataSetChanged();
 
@@ -97,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
+                params.put("city",city);
                 return params;
             }
         };
